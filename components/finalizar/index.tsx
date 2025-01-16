@@ -23,7 +23,7 @@ export function FinalizarCompra({ carrinho }: { carrinho: any[] }) {
     reference_id: "",
     description: "",
     boleto: {
-      due_date: "2025-01-25", // Data predefinida
+      due_date: "2025-01-25", // Data predefinid
       instruction_lines: {
         line_1: "Favor efetuar o pagamento até a data de vencimento.",
         line_2: "Após o vencimento, acrescerão juros e multa.",
