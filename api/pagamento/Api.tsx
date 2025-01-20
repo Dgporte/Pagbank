@@ -1,18 +1,53 @@
 import axios from "axios";
 
-const API_URL = "https://sandbox.api.pagseguro.com/"; // Substitua pela URL correta
-const AUTH_TOKEN = "9ea3b11c-586c-4362-94fa-c5e4f8dea174f080f7654f6cb12790caba6c86ef5c41f20d-ded7-48ce-8eac-46fed269fbdb"; // Substitua pelo token real
+const API_URL = "http://localhost:3000";
+
+export const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export const criarPedido = async (dadosPedido: any) => {
   try {
-    const response = await axios.post(API_URL, dadosPedido, {
-      headers: {
-        Authorization: `Bearer ${AUTH_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    });
-    return response.data; // Retorna os dados da resposta
+    const response = await api.post("/orders", dadosPedido);
+
+    return response.data;
   } catch (error: any) {
+    console.error(
+      "Erro ao criar pedido:",
+      error.response?.data || error.message
+    ); // Log para erro
     throw new Error(error.response?.data?.message || "Erro ao criar pedido");
   }
 };
+
+// import axios from "axios";
+
+// // URL do seu próprio servidor proxy
+// const PROXY_URL = "http://localhost:8080/";
+
+// // URL da API do PagSeguro
+// const API_URL = "https://sandbox.api.pagseguro.com/orders";
+
+// export const api = axios.create({
+//   baseURL: PROXY_URL + API_URL, // Usando o proxy para contornar CORS
+//   headers: {
+//     "Content-Type": "application/json",
+//     "X-Requested-With": "XMLHttpRequest",
+//   },
+// });
+
+// export const criarPedido = async (dadosPedido: any) => {
+//   try {
+//     const response = await api.post("", dadosPedido); // Fazendo a requisição através do proxy
+//     return response.data;
+//   } catch (error: any) {
+//     console.error(
+//       "Erro ao criar pedido:",
+//       error.response?.data || error.message
+//     ); // Log para erro
+//     throw new Error(error.response?.data?.message || "Erro ao criar pedido");
+//   }
+// };

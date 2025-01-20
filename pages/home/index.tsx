@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Card from "../../components/cardsProduto/index"; // Importe o componente Card
-import { criarPedido } from "../../api/pagamento/index"; // Importando a função que cria o pedido
 import { FinalizarCompra } from "../../components/finalizar"; // Importando o componente FinalizarCompra
 import "./style.css";
 
